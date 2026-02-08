@@ -1,14 +1,19 @@
 streamlit==1.33.0
 altair==4.2.2
+protobuf
+grpcio
+
 numpy
 pandas
 scikit-learn
 matplotlib
+
 python-dotenv
 python-docx
 pypdf
+
 sentence-transformers
 torch
 
-
+google-generativeai
 
