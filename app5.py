@@ -95,6 +95,35 @@ def load_pdf(path):
 
     return "\n".join(chunks)
 
+# ================================
+# アップロード文書読み込み
+# ================================
+def load_uploaded_documents(uploaded_files):
+    documents = []
+
+    for file in uploaded_files:
+
+        if file.name.endswith(".docx"):
+            content = load_word(file)
+
+            documents.append({
+                "content": content,
+                "source": file.name,
+                "type": "word",
+                "location": "全文"
+            })
+
+        elif file.name.endswith(".pdf"):
+            content = load_pdf(file)
+
+            documents.append({
+                "content": content,
+                "source": file.name,
+                "type": "pdf",
+                "location": "全文"
+            })
+
+    return documents
 
 
 
@@ -344,22 +373,29 @@ st.caption(
 
 
 # ----------------
-# フォルダから文書ロード
+# ファイルアップロード
 # ----------------
-FOLDER_PATH = r"C:\Users\mt100\Downloads\テストAIチャットボット"
+uploaded_files = st.file_uploader(
+    "📂 Word / PDF をアップロード",
+    type=["pdf", "docx"],
+    accept_multiple_files=True
+)
 
+if not uploaded_files:
+    st.info("まず資料をアップロードしてください")
+    st.stop()
 
-# ===== 検索用 corpus（documents と完全一致）=====
-documents = load_documents_from_folder(FOLDER_PATH)
+documents = load_uploaded_documents(uploaded_files)
 
 if not documents:
-    st.error("文書がありません")
+    st.error("文書が読み込めません")
     st.stop()
 
 corpus = [d["content"] for d in documents]
 
 tfidf_vectorizer, tfidf_matrix = build_tfidf_model(corpus)
 embeddings = build_embedding_model(corpus)
+
 
 
 
@@ -500,6 +536,9 @@ if st.button("📄 Wordに出力"):
         file_name="スライド構成案.docx",
         mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     )
+
+
+
 
 
 
