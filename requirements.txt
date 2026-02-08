@@ -8,6 +8,7 @@ python-dotenv
 python-docx
 pypdf
 sentence-transformers
+torch
 
 
 
