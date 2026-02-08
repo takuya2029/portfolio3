@@ -1,14 +1,8 @@
-python==3.11
-
-pandas
-numpy
 streamlit==1.33.0
-scikit-learn
-sentence-transformers
-google-generativeai
-python-dotenv
-scikit-learn
 altair==4.2.2
+numpy
+pandas
+scikit-learn
 matplotlib
 
 
