@@ -2,10 +2,14 @@ python==3.11
 
 pandas
 numpy
-streamlit
+streamlit==1.33.0
 scikit-learn
 sentence-transformers
 google-generativeai
 python-dotenv
 scikit-learn
 altair==4.2.2
+matplotlib
+
+
+
